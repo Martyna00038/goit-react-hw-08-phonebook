@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const AppContainer = styled.div`
+export const PhonebookContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
 `;
 
-export const AppWrapper = styled.div`
+export const PhonebookWrapper = styled.div`
   background-color: white;
   max-width: 750px;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);

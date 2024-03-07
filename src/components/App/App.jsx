@@ -1,67 +1,68 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
-import PhonebookForm from '../PhonebookForm/PhonebookForm';
-import Filter from '../Filter/Filter';
-import ContactList from '../ContactList/ContactList';
-import { AppContainer, AppWrapper } from './App.styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact, getContact, deleteContacts } from '../../redux/operations';
-import { selectContacts, selectFilter } from '../../redux/selectors';
-import { setFilter } from '../../redux/contactsSlice';
+import { useDispatch } from 'react-redux';
+// import useAuth from 'hooks/useAuth';
+// import { refreshUser } from '../../redux/auth/operations';
 
-const App = () => {
+import { RegisterForm } from '../RegisterForm/RegisterForm';
+// import LoginForm from 'components/LoginForm/LoginForm';
+import Layout from 'components/Layout/Layout';
+// import Home from 'components/Home/Home';
+import Phonebook from 'components/Phonebook/Phonebook';
+import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
+import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
+// import NotFound from 'components/notFound/NotFound';
+
+export default function App() {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  const filter = useSelector(selectFilter);
+  //   const { isRefreshing } = useAuth();
 
-  useEffect(() => {
-    dispatch(getContact());
-  }, [dispatch]);
+  //   useEffect(() => {
+  //     dispatch(refreshUser());
+  //   }, [dispatch]);
 
-  const handleAddContact = ({ name, number }) => {
-    const newContact = {
-      name,
-      number,
-    };
-
-    const checkContactExist = contacts.some(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
-    );
-
-    if (checkContactExist) {
-      alert(`${name} is already in contacts`);
-    } else {
-      dispatch(addContact(newContact));
-    }
-  };
-
-  const handleDeleteContact = contactId => {
-    dispatch(deleteContacts(contactId));
-  };
-
-  const handleChangeFilter = evt => {
-    dispatch(setFilter(evt.target.value));
-  };
-
-  const getFilteredContacts = () => {
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  };
+  //   if (isRefreshing) {
+  //     return <p>loading...</p>;
+  // }
 
   return (
-    <AppContainer>
-      <AppWrapper>
-        <h1>Phonebook</h1>
-        <PhonebookForm onSubmit={handleAddContact} />
-        <h2>Contacts</h2>
-        <Filter value={filter} onChange={handleChangeFilter} />
-        <ContactList
-          contacts={getFilteredContacts()}
-          onDeleteContact={handleDeleteContact}
-        />
-      </AppWrapper>
-    </AppContainer>
+    <BrowserRouter basename="/goit-react-hw-08-phonebook">
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {/* <Route index element={<Home />} /> */}
+          <Route
+            path="register"
+            element={
+              <PrivateRoute
+                Component={<RegisterForm />}
+                redirecTo="/contacts"
+              />
+            }
+          />
+          <Route
+            path="contacts"
+            element={
+              <ProtectedRoute Component={<Phonebook />} redirecTo="/login" />
+            }
+          />
+          {/* <Route
+            path="login"
+            element={
+              <PrivateRoute Component={<LoginForm />} redirecTo="/contacts" />
+            }
+          /> */}
+          <Route
+            path="register"
+            element={
+              <PrivateRoute
+                Component={<RegisterForm />}
+                redirecTo="/contacts"
+              />
+            }
+          />
+        </Route>
+        {/* <Route path="*" element={<NotFound />} /> */}
+      </Routes>
+    </BrowserRouter>
   );
-};
-
-export default App;
+}
