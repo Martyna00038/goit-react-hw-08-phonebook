@@ -11,7 +11,6 @@ import Layout from 'components/Layout/Layout';
 import Phonebook from 'components/Phonebook/Phonebook';
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
-// import NotFound from 'components/notFound/NotFound';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ export default function App() {
 
   //   useEffect(() => {
   //     dispatch(refreshUser());
-  //   }, [dispatch]);
+  //   }, []);
 
   //   if (isRefreshing) {
   //     return <p>loading...</p>;
@@ -61,7 +60,6 @@ export default function App() {
             }
           />
         </Route>
-        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </BrowserRouter>
   );
