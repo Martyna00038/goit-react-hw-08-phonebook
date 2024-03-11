@@ -8,7 +8,7 @@ export const Navigation = () => {
       <NavLink to="/">Home</NavLink>
       {isLoggedIn && (
         <>
-          <NavLink to="/phonebook">Register</NavLink>
+          <NavLink to="/phonebook">Phonebook</NavLink>
         </>
       )}
       {!isLoggedIn && (

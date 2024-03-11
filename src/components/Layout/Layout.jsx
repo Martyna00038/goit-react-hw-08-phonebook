@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Navigation } from 'components/Navigation/Navigation';
-import UserMenu from 'components/UserMenu/UserMenu';
 import useAuth from '../hooks/useAuth';
+import LogoutButton from 'components/UserMenu/LogoutButton';
 
 export default function Layout() {
   const { isLoggedIn } = useAuth();
@@ -10,7 +10,7 @@ export default function Layout() {
     <>
       <div>
         <Navigation />
-        {isLoggedIn && <UserMenu />}
+        {isLoggedIn && <LogoutButton />}
       </div>
       <Outlet />
     </>
