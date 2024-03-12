@@ -19,7 +19,7 @@ export default function App() {
 
   useEffect(() => {
     dispatch(refreshUser());
-  }, []);
+  }, [dispatch]);
 
   if (isRefreshing) {
     return <p>loading...</p>;
