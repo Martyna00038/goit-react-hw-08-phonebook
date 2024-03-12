@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useAuth from '../hooks/useAuth';
 import { refreshUser } from '../../redux/auth/operations';
+import css from './app.module.css';
 
 import Home from 'components/Home/Home';
 import Layout from 'components/Layout/Layout';
@@ -25,31 +26,35 @@ export default function App() {
   }
 
   return (
-    <BrowserRouter basename="/goit-react-hw-08-phonebook">
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route
-            path="register"
-            element={
-              <PrivateRoute
-                Component={<RegisterForm />}
-                redirecTo="/contacts"
-              />
-            }
-          />
-          <Route
-            path="contacts"
-            element={<ProtectedRoute Component={<Phonebook />} redirecTo="/" />}
-          />
-          <Route
-            path="login"
-            element={
-              <PrivateRoute Component={<LoginForm />} redirecTo="/contacts" />
-            }
-          />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <div className={css.appContainer}>
+      <BrowserRouter basename="/goit-react-hw-08-phonebook">
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route
+              path="register"
+              element={
+                <PrivateRoute
+                  Component={<RegisterForm />}
+                  redirecTo="/contacts"
+                />
+              }
+            />
+            <Route
+              path="contacts"
+              element={
+                <ProtectedRoute Component={<Phonebook />} redirecTo="/" />
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <PrivateRoute Component={<LoginForm />} redirecTo="/contacts" />
+              }
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }

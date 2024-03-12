@@ -1,6 +1,6 @@
-// import { selectIsLoggedIn } from 'redux/auth/selectors';
 import LogoutButton from './LogoutButton';
 import useAuth from 'components/hooks/useAuth';
+// import css from './usermenu.module.css';
 
 export default function UserMenu() {
   const { user, isLoggedIn } = useAuth();
